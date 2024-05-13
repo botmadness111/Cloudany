@@ -1,10 +1,7 @@
-FROM openjdk:21
+FROM openjdk:17
 
-# Установка рабочего каталога в контейнере
-WORKDIR /app
+ADD target/project-0.0.1-SNAPSHOT.jar project-0.0.1-SNAPSHOT.jar
 
-# Копирование JAR файла внутрь контейнера
-COPY target/project-0.0.1-SNAPSHOT.jar Cloudany.jar
+EXPOSE 8080
 
-# Команда для запуска приложения
-CMD ["java", "-jar", "Cloudany.jar"]
+ENTRYPOINT ["java", "-jar", "project-0.0.1-SNAPSHOT.jar"]
