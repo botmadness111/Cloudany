@@ -1,7 +1,9 @@
 FROM openjdk:17
 
-ADD target/project-0.0.1-SNAPSHOT.jar project-0.0.1-SNAPSHOT.jar
+WORKDIR /app
+
+COPY target/project-0.0.1-SNAPSHOT.jar Cloudany.jar
+
+CMD ["java", "-jar", "-Dserver.address=0.0.0.0", "Cloudany.jar"]
 
 EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "project-0.0.1-SNAPSHOT.jar"]
