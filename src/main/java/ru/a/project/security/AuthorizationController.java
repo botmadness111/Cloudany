@@ -28,12 +28,12 @@ public class AuthorizationController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "/authorization/signin";
+        return "authorization/signin";
     }
 
     @GetMapping("/register")
     public String registerPage() {
-        return "/authorization/signup";
+        return "authorization/signup";
     }
 
     @PostMapping("/register")

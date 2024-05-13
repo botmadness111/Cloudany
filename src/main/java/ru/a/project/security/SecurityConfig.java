@@ -8,6 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,21 +34,20 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> {
-                    authorize
-                            .requestMatchers("/register", "/login", "/").permitAll()
-//                            .requestMatchers(HttpMethod.POST, "/register").permitAll()
-                            .requestMatchers("/user/home").permitAll()
-                            .requestMatchers("/css/**", "/script/**").permitAll()
-                            .anyRequest().authenticated();
-                })
-                .formLogin(customizer -> {
-                    customizer.loginPage("/login")
-                            .usernameParameter("username")
-                            .passwordParameter("password")
-                            .defaultSuccessUrl("/user/rooms")
-                            .permitAll();
-                })
+                .authorizeHttpRequests(authorize ->
+                        authorize
+                                .requestMatchers("/").permitAll()
+                                .requestMatchers("/user/home").permitAll()
+                                .requestMatchers("/register").permitAll()
+                                .requestMatchers("/css/**").permitAll()
+                                .requestMatchers("/script/**").permitAll()
+                                .requestMatchers("/images/**").permitAll()
+                                .requestMatchers("/login").permitAll()
+                                .anyRequest().authenticated())
+                .formLogin(form -> form
+                        .loginPage("/login").permitAll()
+                )
+
                 .build();
     }
 

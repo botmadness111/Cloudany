@@ -36,7 +36,7 @@ public class FileController {
 
         model.addAttribute("file", convertToFileDto(file));
 
-        return "/room/home/files";
+        return "room/home/files";
     }
 
     private FileDto convertToFileDto(File file) {

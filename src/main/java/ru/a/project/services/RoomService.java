@@ -75,7 +75,7 @@ public class RoomService {
     public ByteArrayResourceWithFilename downloadFile(Integer fileId) throws IOException {
         ru.a.project.model.File file = fileService.findById(fileId);
 
-        Path path = Paths.get(file.getPath() + "\\" + file.getName());
+        Path path = Paths.get(file.getPath() + "/" + file.getName());
 
         byte[] data = Files.readAllBytes(path);
 
@@ -98,7 +98,7 @@ public class RoomService {
                 directory.mkdir();
             }
 
-            currentDirectory = System.getProperty("user.dir") + "\\storage";
+            currentDirectory = System.getProperty("user.dir") + "/storage";
             directory = new File(currentDirectory, String.valueOf(roomId));
 
             if (!directory.exists()) {
@@ -119,7 +119,7 @@ public class RoomService {
 
             User user = userService.findById(userId);
 
-
+            System.out.println(Objects.requireNonNull(multipatFile.getOriginalFilename()));
             String[] fileSplit = Objects.requireNonNull(multipatFile.getOriginalFilename()).split("\\.");
             String type = fileSplit[1];
             String nameWithoutType = fileSplit[0];
@@ -153,7 +153,8 @@ public class RoomService {
             room.addFile(file);
             user.addFile(file);
 
-            FileOutputStream fileOutputStream = new FileOutputStream(directory.getPath() + "\\" + fileName);
+
+            FileOutputStream fileOutputStream = new FileOutputStream(directory.getPath() + "/" + fileName);
 
             fileOutputStream.write(inputStream.readAllBytes());
 

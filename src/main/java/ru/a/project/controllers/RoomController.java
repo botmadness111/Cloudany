@@ -53,7 +53,7 @@ public class RoomController {
         model.addAttribute("room", room);
         model.addAttribute("files", convertToFileDto(room.getFiles()));
 
-        return "/room/home/files";
+        return "room/home/files";
     }
 
     @GetMapping("/{id}/users")
@@ -71,7 +71,7 @@ public class RoomController {
         model.addAttribute("room", room);
         model.addAttribute("users", convertToUserDto(room.getUsers()));
 
-        return "/room/home/users";
+        return "room/home/users";
     }
 
     @PostMapping("/upload")

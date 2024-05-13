@@ -43,7 +43,7 @@ public class UserController {
         model.addAttribute("userRooms", userRooms);
         model.addAttribute("adminRooms", adminRooms);
         model.addAttribute("c_user", user);
-        return "/user/rooms";
+        return "user/rooms";
     }
 
     @GetMapping("/home")
